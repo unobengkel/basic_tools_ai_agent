@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi DeepSeek Tools AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i data-lucide="cpu"></i>
+                <span>DeepSeek Tools</span>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="showSection('pengenalan')">
+                        <i data-lucide="book-open" style="width: 18px; display: inline-block; margin-right: 10px;"></i>
+                        Pengenalan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('setup')">
+                        <i data-lucide="settings" style="width: 18px; display: inline-block; margin-right: 10px;"></i>
+                        Setup & Instalasi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('penggunaan')">
+                        <i data-lucide="play" style="width: 18px; display: inline-block; margin-right: 10px;"></i>
+                        Cara Penggunaan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('metode')">
+                        <i data-lucide="graduation-cap" style="width: 18px; display: inline-block; margin-right: 10px;"></i>
+                        Metode Belajar
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Section: Pengenalan -->
+            <section id="pengenalan" class="content-section active">
+                <h1>Pengenalan</h1>
+                <div class="card">
+                    <p>Program ini adalah contoh praktis penggunaan <strong>Function Calling</strong> (Tools) pada AI DeepSeek. Tool Use memungkinkan AI untuk berinteraksi dengan dunia nyata melalui fungsi-fungsi Python yang Anda definisikan.</p>
+                    <p>Berbeda dengan chat biasa, AI bisa "memutuskan" untuk memanggil fungsi (seperti mengecek harga saham atau cuaca) ketika mendeteksi bahwa pertanyaan pengguna membutuhkan data eksternal.</p>
+                </div>
+                <h2>Kenapa Ini Penting?</h2>
+                <p>AI seringkali memiliki pengetahuan yang terbatas pada tanggal tertentu. Dengan Tools, Anda memberikan AI kemampuan untuk:</p>
+                <ul>
+                    <li>Mengambil data terbaru dari API.</li>
+                    <li>Melakukan perhitungan kompleks.</li>
+                    <li>Berinteraksi dengan database atau file sistem.</li>
+                </ul>
+            </section>
+
+            <!-- Section: Setup -->
+            <section id="setup" class="content-section">
+                <h1>Setup & Instalasi</h1>
+                <div class="card">
+                    <h2>Langkah 1: Instalasi Library</h2>
+                    <p>DeepSeek menggunakan API yang kompatibel dengan OpenAI, jadi Anda cukup menginstal library resmi OpenAI:</p>
+                    <pre><code>pip install openai</code></pre>
+                </div>
+                <div class="card">
+                    <h2>Langkah 2: Konfigurasi API Key</h2>
+                    <p>Anda harus memiliki API Key dari <a href="https://platform.deepseek.com/" target="_blank">DeepSeek Platform</a>. Setel key tersebut sebagai environment variable untuk keamanan:</p>
+                    <pre><code># Windows (PowerShell)
+$env:DEEPSEEK_API_KEY = "sk-..."
+
+# Linux / Mac
+export DEEPSEEK_API_KEY="sk-..."</code></pre>
+                </div>
+            </section>
+
+            <!-- Section: Penggunaan -->
+            <section id="penggunaan" class="content-section">
+                <h1>Cara Penggunaan</h1>
+                <p>Ikuti langkah berikut untuk menjalankan skrip contoh:</p>
+                <div class="card">
+                    <ol>
+                        <li>Buka terminal di folder project <code>belajar_tools_ai</code>.</li>
+                        <li>Jalankan skrip utama:
+                            <pre><code>python deepseek_tools.py</code></pre>
+                        </li>
+                    </ol>
+                </div>
+                <h2>Apa yang Terjadi di Balik Layar?</h2>
+                <p>Saat Anda bertanya <em>"Berapa harga saham Apple?"</em>:</p>
+                <ol>
+                    <li>Model DeepSeek melihat daftar <code>tools</code> yang tersedia.</li>
+                    <li>AI menjawab dengan pesan khusus untuk memanggil fungsi <code>get_stock_price</code>.</li>
+                    <li>Skrip Python menerima permintaan itu, mengeksekusi fungsi lokal, dan mengirim hasilnya balik ke AI.</li>
+                    <li>AI memberikan jawaban akhir berdasarkan data dari fungsi tersebut.</li>
+                </ol>
+            </section>
+
+            <!-- Section: Metode Belajar -->
+            <section id="metode" class="content-section">
+                <h1>Metode Belajar</h1>
+                <p>Untuk menguasai penggunaan AI Tools, kami menyarankan urutan belajar berikut:</p>
+                <div class="card">
+                    <h2>1. Perhatikan Schema JSON</h2>
+                    <p>Lihat variabel <code>tools</code> di dalam kode. Pahami bagaimana <code>description</code> sangat berperan penting agar AI tahu kapan harus menggunakan fungsi tersebut.</p>
+                </div>
+                <div class="card">
+                    <h2>2. Eksperimen Parameter</h2>
+                    <p>Coba ganti input pengguna dengan simbol saham yang tidak ada dalam daftar (misal: "GOTO"). Perhatikan bagaimana logika <code>else</code> di Python menangani hal tersebut.</p>
+                </div>
+                <div class="card">
+                    <h2>3. Tambahkan Tool Baru</h2>
+                    <p>Tantangan: Buat fungsi baru <code>get_crypto_price</code> dan tambahkan ke daftar tools. Ini adalah cara terbaik untuk memvalidasi pemahaman Anda.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Theme Toggle -->
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <div id="light-icon" class="toggle-btn active"><i data-lucide="sun"></i></div>
+            <div id="dark-icon" class="toggle-btn"><i data-lucide="moon"></i></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
